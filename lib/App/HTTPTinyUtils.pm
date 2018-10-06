@@ -36,8 +36,13 @@ $SPEC{http_tiny} = {
         content => {
             schema => 'str*',
         },
+        raw => {
+            schema => 'bool*',
+        },
+        # XXX option: agent
+        # XXX option: timeout
+        # XXX option: post form
     },
-    result_naked => 1,
 };
 sub http_tiny {
     require HTTP::Tiny;
@@ -47,7 +52,21 @@ sub http_tiny {
     my $method = $args{method} // 'GET';
 
     my %opts;
-    HTTP::Tiny->request($method, $url, \%opts);
+
+    if (defined $args{content}) {
+        $opts{content} = $args{content};
+    } elsif (!(-t STDIN)) {
+        local $/;
+        $opts{content} = <STDIN>;
+    }
+
+    my $res = HTTP::Tiny->new->request($method, $url, \%opts);
+
+    if ($args{raw}) {
+        [200, "OK", $res];
+    } else {
+        [$res->{status}, $res->{reason}, $res->{content}];
+    }
 }
 
 1;
