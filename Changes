@@ -1,3 +1,8 @@
+0.004   2020-12-27  Released-By: PERLANCAR; Urgency: medium
+
+	- Add CLIs: list-idx-{boards,brokers,firms,sectors}-static.
+
+
 0.003   2020-12-24  Released-By: PERLANCAR; Urgency: medium
 
 	- Add CLI: list-idx-brokers.
