@@ -14,3 +14,8 @@ This distribution includes several utilities related to the Indonesian Stock
 Exchange (IDX):
 
 #INSERT_EXECS_LIST
+
+
+=head1 SEE ALSO
+
+L<App::idxdb>
